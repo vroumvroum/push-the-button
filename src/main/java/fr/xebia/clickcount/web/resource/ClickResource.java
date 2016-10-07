@@ -15,8 +15,12 @@ import javax.ws.rs.core.MediaType;
 @Singleton
 public class ClickResource {
 
-    @Inject
     private ClickRepository clickRepository;
+
+    @Inject
+    public ClickResource(ClickRepository clickRepository) {
+        this.clickRepository = clickRepository;
+    }
 
     @GET
     @Path("click")

@@ -32,3 +32,12 @@ script:
 
 after_success:
   - mvn clean -X org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar -Dsonar.login=$SONAR_TOKEN -Dsonar.projectKey="push-the-button-${TRAVIS_BRANCH}"
+
+deploy:
+  provider: releases
+  api_key:
+    secure: es6vjeATn9WLQlq8Rl5vJNv/ln+AD4qezo5Zt/SRnVW9mvSjONkHsvnpnMhbXHB6u96XyE4Fp/VHoe6TDwYGnG3IZz8fJlleLgrJK1ZjDHjqLQD7l3a4ftF2uRwHJ1s1cFyW+QjWNPQWIqJE/rCicr5F3T0tm6vij52BS2ejc/CsLD2/9cfHbssE4u8/nD6QQOIVyjlanrf+hDigETr0QRcrEq9S05qxwaidc0NHVoaSrq2c1gADxE+bGqExePawRdBOxAl6voPgtRYT63MKApDf+TkLe6S2PMpLdNQC57Lc29bMDrdIOTcZblyRoK2MLohQzMl3RKAKyr6soTVwWagOIVsHnIcqXfKBMOxu+uQA5JTLkCEdo69O3pMFYMxNvRYxW5gYVjlAOKNHuwUqwdGIZh4PLm4aBOU/b/ZpO+1wYE3v2dWYI0+KKC4fns+5LC2cH+HrSja5qc+7v3ZoyNPVQWYip1vb075odjFSaezTo1GlKrUF/pe6INlr+2e8i3udc89scEEPJ2zyAOdsQMP2vIaBKRNocRp+thIGq6CSC7J0OtD/Bx24lPMPcFSahL7EFGt7ZQBwnxxbzFyC0Om69nMtQ5jr+pNXtxQclvHuJIvTE54qxiFhbhaAiF9MtkkC97hD+zk84hTlJgRLRRG7s6rKgCM+chMnNgKqGyY= 
+  file: target/clickCount.war
+  skip_cleanup: true
+  on:
+    tags: true

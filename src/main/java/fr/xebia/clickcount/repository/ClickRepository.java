@@ -40,8 +40,8 @@ public class ClickRepository {
             return conn.sync(RedisCommands.PING);
 
         } catch (RedisConnectionException e) {
-            return e.getCause().getMessage();
             log.info("RedisConnectionException",e);
+            return e.getCause().getMessage();
         } finally {
             if (conn != null) {
                 conn.closeAsync();

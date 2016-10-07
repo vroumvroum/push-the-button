@@ -11,7 +11,7 @@ git:
 #Secure key is for SONAR_TOKEN
 env:
   global:
-    - secure: qrWqvYUSe2rHmv1Q3EMP92F6x035TYgWwYFxfHEXOZItV6Fjm/RXpjXJ8HZQrWDxCKfcgC0mVEfecdmy7z1GLwEDxMMUi3l/wFOqXL81MIGkzZNKxNuLpbYzSNcRPDELqPQ2vFgrva8b/OpmS2nsk8MmtVd/LEW9pf+gAJoeh7Ady6mbzHgrH3IwXwTBTmVHvKHqim5G4Q1u/Ba+sSSl74LvdLhzXfL+IKTa62+dgLuHoGk3+XPWV9z1vQK2CbEeba/oI+FUlasIPHYNQPTYwnm5H4ZoE14ljt+rOabPaw3CWrvICB0meFRzOcok3kfRYuLj1YSp1gCwhblmVUGh1d5qdRqRTlwZgsf0DlAPvI7YreOh/5g6/4ji4eQVryIAnAYx21TDMMTMHdmy4BGAuetzSYTRDoX3UyZsEkP0XM/zOFewIECltB0RsFosoBA7KMXtMAHnkbxvGcAbzExEgXJQ986hfnkPq3jLuRBFnIOoK3C4b1yEAK6X2v117YUZTQCraA7CFL4ae2eUVqWFOBWHRxyuDxtmvzSahPtAviE57sCJnPX8wDbjNvX0WQQSLYfTxXQH7GO1wFZxsEaZPVonjHyr1/eNpn3Z+tJwthsDccvsPfz54bVSfbdr27SXeq/ngjuKqIJc6zYn5pGoTKreDqzBEpEMyHsqRqVH7F8=
+    - secure: cVA5VriyUReySRsCk850MosmHF4yZF5dUBctkokqH6b5Lp7yUqEj7OtLxzlYDzr+dj0IyyZEKRu/5c+W5DxeLXmh4pAxOGOPnme7QoYLfPpobKphJadC6aJ3Ofx2qnbTOTPax1SQjguvP6SatsayZHsnuDlZjgH7ZBvqF3eGuGH+4Q3AIz9YhR8pRJxs7ogrDz4R3qPwnGlPBR+6JfwhK/zB0Y2fypKAyoKF7EnEjnCYRdKztBjSJYoTTnGuu4+nzSbfqTtloPfedhwT+5+dgmVL1QlCjMgbRxUliYUVhxHCGFFLsQ7kfhFyMK87M7/GepNUd+WIKX/a/39cDeU00M+VZYwmJNz9IRW8aUYbBAGEGYQ+gjFyCXdHLbIPug1HLTEo5lRciue/ghBk+QXMoDz/9LuwjF2/AHLGLyWMS8kvdmvFpRhbptfA8GIYCybYlBdKfpk9qsfT0Hywa4oLaY90ZrBeE4xkGIQGtkx17If6UKzl/b7Qi0EkVKF6IySMT9fz1jwTh6EEIljh+gH1wFVLZfbRhCv2AzYrFlDQPqJb1zfQnkPweNw+tiSlMSOpGLVhtBxbVktG/Bnz15luut/xi6mWvvlBnKK6FbW5v3ruRgSgCLMakWQJGGNJmgzcW/qDRt2bnmj2a6MpVPW9tF4IFIBen85qrtybF4NumOs= 
 
 #Skipping install phase
 install: true
@@ -31,4 +31,4 @@ script:
   - mvn clean package 
 
 after_success:
-  - mvn clean -X org.jacoco:jacoco-maven-plugin:prepare-agent validate sonar:sonar -Dsonar.login=$SONAR_TOKEN -Dsonar.projectKey="push-the-button-${TRAVIS_BRANCH}"
+  - mvn clean -X org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar -Dsonar.login=$SONAR_TOKEN -Dsonar.projectKey="push-the-button-${TRAVIS_BRANCH}"

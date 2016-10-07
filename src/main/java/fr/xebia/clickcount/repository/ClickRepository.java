@@ -41,7 +41,7 @@ public class ClickRepository {
 
         } catch (RedisConnectionException e) {
             return e.getCause().getMessage();
-            log.info(e);
+            log.info("RedisConnectionException",e);
         } finally {
             if (conn != null) {
                 conn.closeAsync();

@@ -1,0 +1,25 @@
+$script = <<SCRIPT
+apt-get install -y ruby ruby-dev
+gem install travis
+sed -i 's/ExecStart=.*/EnvironmentFile=-\\/etc\\/default\\/docker\\nExecStart=\\/usr\\/bin\\/dockerd \\$DOCKER_OPTS -H fd:\\/\\//g' /lib/systemd/system/docker.service
+sed -i 's/#DOCKER_OPTS=.*/DOCKER_OPTS=\\"-H tcp:\\/\\/0\\.0\\.0\\.0:2375 -H unix:\\/\\/\\/var\\/run\\/docker\\.sock\\"/g' /etc/default/docker
+systemctl daemon-reload
+service docker restart
+SCRIPT
+
+Vagrant.configure("2") do |config|
+ 
+  config.vm.provision "docker"
+  config.vm.provision "shell", inline: $script
+  
+  config.vm.define "push-the-button"
+  config.vm.box = "bento/ubuntu-16.04"
+  config.vm.network "forwarded_port", guest:80, host:80
+  config.vm.network "forwarded_port", guest:8080, host:8080
+  config.vm.network "forwarded_port", guest:443, host:443
+ 
+  config.vm.provider :virtualbox do |vb|
+      vb.name = "push-the-button"
+  end
+ 
+end
